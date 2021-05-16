@@ -16,7 +16,7 @@ const StyledImage = styled.Image`
     background-color:${({theme}) => theme.imageBackground};
     height: 100px;
     width: 100px;
-    border-radius: ${({rounded}) => (rounded? 50 : 0)};
+    border-radius: ${({rounded}) => (rounded? 50 : 0)}px;
 `;
 
 const ButtonContainer = styled.TouchableOpacity`

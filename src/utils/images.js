@@ -2,5 +2,5 @@ const prefix = "https://firebasestorage.googleapis.com/v0/b/simplechat-f805b.app
 
 export const images = {
     logo: `${prefix}/logo.png?alt=media`,
-    photo:  `${prefix}/photo.png?alt=media`,
-};
+    photo: `${prefix}/photo.png?alt=media`,
+  };

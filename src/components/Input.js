@@ -16,7 +16,7 @@ const Label = styled.Text`
 const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
   placeholderTextColor: theme.inputPlaceholder,
 }))`
-  background-color: ${({ theme, editable }) => theme.background};
+  background-color: ${({ theme, editable }) => editable? theme.background: theme.inputDisabledBackground};
   color: ${({ theme }) => theme.text};
   padding: 20px 10px;
   font-size: 16px;
@@ -25,6 +25,7 @@ const StyledTextInput = styled.TextInput.attrs(({ theme }) => ({
   border-radius: 4px;
 `;
 
+//  ref는 props로 전달되지 않기 때문애(key처럼), forwardRef함수를 통해 전달. 
 const Input = forwardRef(
   (
     {
@@ -37,6 +38,7 @@ const Input = forwardRef(
       isPassword,
       returnKeyType,
       maxLength,
+      disabled,
     },
     ref
   ) => {
@@ -64,6 +66,7 @@ const Input = forwardRef(
           autoCorrect={false}
           textContentType="none" // iOS only
           underlineColorAndroid="transparent" // Android only
+          editable={!disabled}
         />
       </Container>
     );
@@ -72,6 +75,8 @@ const Input = forwardRef(
 
 Input.defaultProps = {
   onBlur: () => {},
+  onChangeText: () => {},
+  onSubmitEditing: () => {},
 };
 
 Input.propTypes = {
@@ -84,6 +89,9 @@ Input.propTypes = {
   isPassword: PropTypes.bool,
   returnKeyType: PropTypes.oneOf(['done', 'next']),
   maxLength: PropTypes.number,
+  onChangeText: PropTypes.func,
+  onSubmitEditing: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default Input;
